@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import dynamic from "next/dynamic";
 import TextType from "@/components/ui/TextType";
 import { Github, Linkedin, Instagram } from "lucide-react";
@@ -24,11 +24,12 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const container = {
+  const container: Variants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
   };
-  const item = {
+
+  const item: Variants = {
     hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
     visible: {
       opacity: 1,
@@ -131,7 +132,11 @@ export default function Hero() {
           className="hidden sm:flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.92, filter: "blur(8px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ delay: 0.4, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          transition={{
+            delay: 0.4,
+            duration: 0.8,
+            ease: [0.23, 1, 0.32, 1] as const,
+          }}
         >
           <LaptopModel />
         </motion.div>
