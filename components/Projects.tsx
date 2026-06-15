@@ -1,14 +1,13 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { projects, techIcons } from "@/data/projects";
+import Link from "next/link";
+import { projects, techIcons, getProjectRoute } from "@/data/projects";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 
 export default function Projects() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const router = useRouter();
 
   return (
     <section id="projects" className="py-24 md:py-55 px-6 md:px-16" ref={ref}>
@@ -29,19 +28,18 @@ export default function Projects() {
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 items-stretch">
         {projects.map((project, i) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              delay: 0.1 + i * 0.12,
-              duration: 0.6,
-              ease: [0.23, 1, 0.32, 1],
-            }}
-            onClick={() => router.push(`/projects/${project.id}`)}
-            className="group cursor-pointer h-full"
-          >
-            <div className="relative h-full flex flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-500 hover:border-foreground/25 hover:shadow-lg hover:-translate-y-1">
+          <Link key={project.id} href={getProjectRoute(project)} className="group h-full">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                delay: 0.1 + i * 0.12,
+                duration: 0.6,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+              className="group cursor-pointer h-full"
+            >
+              <div className="relative h-full flex flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-500 hover:border-foreground/25 hover:shadow-lg hover:-translate-y-1">
               <div className="relative w-full aspect-video overflow-hidden bg-foreground/8">
                 {project.heroImage ? (
                   <img
@@ -110,6 +108,7 @@ export default function Projects() {
               </div>
             </div>
           </motion.div>
+          </Link>
         ))}
       </div>
     </section>

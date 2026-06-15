@@ -76,7 +76,9 @@ export default function HoloCard({
         <img
           src={avatarUrl}
           alt={name}
-          className="absolute left-0 right-0 w-full object-cover object-top"
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
+          className="absolute left-0 right-0 w-full object-cover object-top pointer-events-none"
           style={{
             top: "88px",
             bottom: "72px",

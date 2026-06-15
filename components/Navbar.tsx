@@ -85,8 +85,8 @@ export default function Navbar() {
         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
         className="fixed top-6 left-1/2 -translate-x-1/2
-          backdrop-blur-md bg-black/10 dark:bg-white/10
-          border border-black/10 dark:border-white/20
+          backdrop-blur-md bg-background/80
+          border border-border
           px-8 py-3 rounded-full
           hidden md:flex items-center gap-16
           w-auto z-50"
@@ -187,7 +187,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-5 py-4 backdrop-blur-md bg-background/80 border-b border-foreground/10"
+        className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-5 py-4 backdrop-blur-md bg-background/80 border-b border-border"
       >
         <a
           href="/"

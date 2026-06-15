@@ -9,6 +9,8 @@ export type Project = {
   screenshots: string[];
   year: string;
   category: string;
+  route: string;
+  liveDemoUrl?: string;
 };
 
 export type TechItem = {
@@ -35,6 +37,8 @@ export const projects: Project[] = [
     screenshots: ["/projects/umkm-i/umkm1.png", "/projects/umkm-i/umkm2.png"],
     year: "2025",
     category: "Web App",
+    route: "/projects/umkm-i",
+    liveDemoUrl: "https://umkm-app-phi.vercel.app",
   },
   {
     id: "absenku",
@@ -57,31 +61,71 @@ export const projects: Project[] = [
     ],
     year: "2025",
     category: "Web App",
+    route: "/projects/absenku",
   },
   {
-    id: "portfolio",
-    title: "Portfolio Website",
-    shortDesc: "Personal portfolio dengan animasi dan dark mode support.",
+    id: "nusakarya",
+    title: "NusaKarya",
+    shortDesc:
+      "Platform digital inspiratif untuk mendorong generasi muda Indonesia berkarya dan berkontribusi.",
+
     description:
-      "Website portfolio personal yang dibangun dengan Next.js dan Tailwind CSS. Menampilkan projects, skills, dan informasi kontak dengan desain modern. Dilengkapi dark/light mode dengan ripple transition effect dan animasi marquee untuk skills carousel.",
+      "NusaKarya adalah website landing page modern yang dirancang sebagai ruang digital bagi generasi muda Indonesia untuk menemukan inspirasi, memahami pentingnya kontribusi sosial, dan menyampaikan ide atau aspirasi mereka. Website ini mengusung tema 'Berkarya Untuk Indonesia' dengan fokus pada pengalaman pengguna yang interaktif melalui animasi halus, navigasi berbasis section, serta form aspirasi yang tervalidasi. Dibangun menggunakan Next.js App Router dan TypeScript, proyek ini menerapkan pendekatan component-based architecture untuk menjaga maintainability dan reusability kode, didukung oleh Framer Motion untuk animasi, React Hook Form dan Zod untuk validasi form, serta Tailwind CSS untuk pengembangan antarmuka yang cepat dan konsisten. Seluruh aplikasi dideploy menggunakan Vercel sehingga mendukung proses deployment modern dan scalable.",
+
     techStack: [
-      { name: "Next.js", docs: "https://nextjs.org/docs" },
-      { name: "TypeScript", docs: "https://www.typescriptlang.org/docs" },
-      { name: "Tailwind CSS", docs: "https://tailwindcss.com/docs" },
-      { name: "Framer Motion", docs: "https://www.framer.com/motion" },
+      {
+        name: "Next.js",
+        docs: "https://nextjs.org/docs",
+      },
+      {
+        name: "React",
+        docs: "https://react.dev",
+      },
+      {
+        name: "TypeScript",
+        docs: "https://www.typescriptlang.org/docs",
+      },
+      {
+        name: "Tailwind CSS",
+        docs: "https://tailwindcss.com/docs",
+      },
+      {
+        name: "Framer Motion",
+        docs: "https://www.framer.com/motion",
+      },
+      {
+        name: "React Hook Form",
+        docs: "https://react-hook-form.com",
+      },
+      {
+        name: "Zod",
+        docs: "https://zod.dev",
+      },
     ],
-    github: "https://github.com/farhnsndlr/portfolio-web",
-    heroImage: "/projects/portfolio/portfolio_thumbnail.png",
+
+    github: "https://github.com/farhnsndlr/nusakarya-web",
+    route: "/projects/nusakarya",
+    liveDemoUrl: "https://nusakarya-sooty.vercel.app/",
+
+    heroImage:
+      "/projects/nusakarya/nusakarya-thumbnail.png",
+
     screenshots: [
-      "/projects/portfolio/portfolio1.png",
-      "/projects/portfolio/portfolio3.png",
+      "/projects/nusakarya/nusakarya-1.png",
+      "/projects/nusakarya/nusakarya-2.png",
+      "/projects/nusakarya/nusakarya-3.png",
+      "/projects/nusakarya/nusakarya-4.png",
     ],
-    year: "2025",
-    category: "Frontend",
+
+    year: "2026",
+
+    category: "Landing Page",
   },
 ];
 
 // Map tech name ke icon dari Simple Icons / devicons
+export const getProjectRoute = (project: Project) => project.route;
+
 export const techIcons: Record<string, string> = {
   Laravel: "https://cdn.simpleicons.org/laravel",
   PHP: "https://cdn.simpleicons.org/php",
@@ -94,4 +138,6 @@ export const techIcons: Record<string, string> = {
   "Framer Motion": "https://cdn.simpleicons.org/framer",
   React: "https://cdn.simpleicons.org/react",
   Git: "https://cdn.simpleicons.org/git",
+  Zod: "https://cdn.simpleicons.org/zod",
+  "React Hook Form": "https://cdn.simpleicons.org/reacthookform",
 };

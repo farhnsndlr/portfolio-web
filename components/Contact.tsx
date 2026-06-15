@@ -34,8 +34,8 @@ const contactLinks = [
   },
   {
     label: "WhatsApp",
-    value: "+62 851 5539 9057",
-    href: "https://wa.me/6285155399057",
+    value: "+62 815 7402 9222",
+    href: "https://wa.me/6281574029222",
     icon: MessageCircle,
   },
 ];

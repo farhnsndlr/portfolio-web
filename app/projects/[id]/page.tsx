@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { projects, techIcons } from "@/data/projects";
 import { ArrowLeft, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import ProjectGallery from "@/components/ProjectGallery";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ id: p.id }));
@@ -124,6 +125,22 @@ export default async function ProjectDetail({
                 <ArrowLeft size={13} className="rotate-180" />
               </a>
             </div>
+            {project.liveDemoUrl && (
+              <div>
+                <h2 className="text-xs uppercase tracking-[0.25em] text-foreground/40 mb-3 md:mb-4">
+                  Live Demo
+                </h2>
+                <a
+                  href={project.liveDemoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 rounded-full border border-foreground/10 bg-background text-foreground text-sm font-medium hover:bg-foreground/5 transition-all duration-300 cursor-pointer"
+                >
+                  <ExternalLink size={15} />
+                  Open live demo
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
@@ -133,20 +150,10 @@ export default async function ProjectDetail({
             <h2 className="text-xs uppercase tracking-[0.25em] text-foreground/40 mb-4 md:mb-6">
               Screenshots
             </h2>
-            <div className="grid grid-cols-1 gap-4 md:gap-5">
-              {project.screenshots.map((img, i) => (
-                <div
-                  key={i}
-                  className="w-full rounded-xl md:rounded-2xl overflow-hidden border border-foreground/10 bg-foreground/5"
-                >
-                  <img
-                    src={img}
-                    alt={`${project.title} screenshot ${i + 1}`}
-                    className="w-full"
-                  />
-                </div>
-              ))}
-            </div>
+            <ProjectGallery
+              screenshots={project.screenshots}
+              title={project.title}
+            />
           </div>
         )}
       </div>
