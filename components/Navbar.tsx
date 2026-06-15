@@ -7,9 +7,9 @@ import { useScrollTransition } from "@/hooks/useScrollTransition";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", id: "about" },
+  { label: "Projects", id: "projects" },
+  { label: "Contact", id: "contact" },
 ];
 
 export default function Navbar() {
@@ -37,7 +37,7 @@ export default function Navbar() {
         const distance = Math.abs(rect.top - window.innerHeight / 3);
         if (rect.top <= window.innerHeight / 2 && distance < minDistance) {
           minDistance = distance;
-          current = "#" + id;
+          current = id;
         }
       });
       setActiveSection(current);
@@ -48,7 +48,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const activeIndex = navLinks.findIndex((l) => l.href === activeSection);
+    const activeIndex = navLinks.findIndex((l) => l.id === activeSection);
     if (activeIndex === -1 || !navRef.current) {
       setUnderlineStyle({ left: 0, width: 0 });
       return;
@@ -72,9 +72,9 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const handleMobileNav = (href: string) => {
+  const handleMobileNav = (id: string) => {
     setSidebarOpen(false);
-    setTimeout(() => scrollTo(href), 300);
+    setTimeout(() => scrollTo(id), 300);
   };
 
   return (
@@ -113,9 +113,9 @@ export default function Navbar() {
           ref={navRef}
           className="relative flex items-center gap-8 text-sm tracking-widest text-foreground"
         >
-          {navLinks.map(({ label, href }, i) => (
+          {navLinks.map(({ label, id }, i) => (
             <motion.div
-              key={href}
+              key={id}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -125,21 +125,17 @@ export default function Navbar() {
               }}
             >
               <ClickSpark>
-                <motion.a
-                  href={href}
+                <motion.button
                   ref={(el) => {
                     linkRefs.current[i] = el;
                   }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo(href);
-                  }}
+                  onClick={() => scrollTo(id)}
                   whileTap={{ scale: 0.93 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="relative transition-colors duration-300 cursor-pointer"
+                  className="relative transition-colors duration-300 cursor-pointer bg-transparent border-none px-0 py-0"
                   style={{
                     color:
-                      activeSection === href
+                      activeSection === id
                         ? "var(--foreground)"
                         : hoveredIndex === i
                           ? "color-mix(in oklch, var(--foreground) 80%, transparent)"
@@ -158,7 +154,7 @@ export default function Navbar() {
                     transition={{ duration: 0.2 }}
                   />
                   <span className="relative">{label}</span>
-                </motion.a>
+                </motion.button>
               </ClickSpark>
             </motion.div>
           ))}
@@ -219,7 +215,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-60 bg-black/50 backdrop-blur-sm md:hidden"
             />
 
             {/* Sidebar panel */}
@@ -229,7 +225,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 z-[70] w-72 bg-background border-l border-foreground/10 flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 z-70 w-72 bg-background border-l border-foreground/10 flex flex-col md:hidden"
             >
               {/* Sidebar header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-foreground/10">
@@ -247,14 +243,10 @@ export default function Navbar() {
 
               {/* Nav links */}
               <nav className="flex flex-col gap-1 p-4 flex-1">
-                {navLinks.map(({ label, href }, i) => (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleMobileNav(href);
-                    }}
+                {navLinks.map(({ label, id }, i) => (
+                  <motion.button
+                    key={id}
+                    onClick={() => handleMobileNav(id)}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
@@ -262,14 +254,14 @@ export default function Navbar() {
                       duration: 0.3,
                       ease: "easeOut",
                     }}
-                    className="flex items-center justify-between px-4 py-4 rounded-xl text-foreground/60 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 cursor-pointer group"
+                    className="flex items-center justify-between px-4 py-4 rounded-xl text-foreground/60 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 cursor-pointer group bg-transparent border-none text-left w-full"
                     style={{
                       color:
-                        activeSection === href
+                        activeSection === id
                           ? "var(--foreground)"
                           : undefined,
                       background:
-                        activeSection === href
+                        activeSection === id
                           ? "color-mix(in oklch, var(--foreground) 6%, transparent)"
                           : undefined,
                     }}
@@ -277,10 +269,10 @@ export default function Navbar() {
                     <span className="text-sm tracking-widest uppercase">
                       {label}
                     </span>
-                    {activeSection === href && (
+                    {activeSection === id && (
                       <div className="w-1.5 h-1.5 rounded-full bg-foreground" />
                     )}
-                  </motion.a>
+                  </motion.button>
                 ))}
               </nav>
 

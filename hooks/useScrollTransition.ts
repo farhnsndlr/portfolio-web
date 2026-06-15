@@ -2,20 +2,23 @@
 import { useCallback } from "react";
 
 export function useScrollTransition() {
-  const scrollTo = useCallback((href: string) => {
-    if (!href.startsWith("#")) {
-      window.location.href = href;
+  const scrollTo = useCallback((target: string) => {
+    // Handle full URLs
+    if (target.startsWith("http")) {
+      window.location.href = target;
       return;
     }
 
-    const target = document.querySelector(href) as HTMLElement;
-    if (!target) return;
+    // Handle section IDs (with or without #)
+    const sectionId = target.startsWith("#") ? target.slice(1) : target;
+    const element = document.getElementById(sectionId) as HTMLElement;
+    if (!element) return;
 
     document.body.style.transition = "opacity 0.25s ease";
     document.body.style.opacity = "0.4";
 
     setTimeout(() => {
-      target.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth" });
       
       setTimeout(() => {
         document.body.style.opacity = "1";
