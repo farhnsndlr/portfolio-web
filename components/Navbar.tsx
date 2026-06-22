@@ -17,7 +17,7 @@ export default function Navbar() {
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const linkRefs = useRef<(HTMLElement | null)[]>([]);
   const navRef = useRef<HTMLDivElement>(null);
   const { scrollTo } = useScrollTransition();
 
