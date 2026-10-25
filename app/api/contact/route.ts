@@ -23,9 +23,19 @@ export async function POST(req: Request) {
       );
     }
 
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.warn("RESEND_API_KEY is not configured.");
+      return NextResponse.json(
+        { error: "Email service is not configured in this environment." },
+        { status: 503 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
     await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: process.env.TO_EMAIL!,
+      to: process.env.TO_EMAIL || "sultannadlir.11@gmail.com",
       replyTo: email,
       subject: `New message from ${name}`,
       html: `

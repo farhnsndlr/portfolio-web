@@ -3,14 +3,19 @@ export type Project = {
   title: string;
   shortDesc: string;
   description: string;
+  summary?: string;
   techStack: TechItem[];
   github: string;
   heroImage: string;
   screenshots: string[];
   year: string;
   category: string;
+<<<<<<< HEAD
   route: string;
   liveDemoUrl?: string;
+=======
+  featured?: boolean;
+>>>>>>> develop
 };
 
 export type TechItem = {
@@ -23,9 +28,11 @@ export const projects: Project[] = [
     id: "umkm-i",
     title: "UMKM-i",
     shortDesc:
-      "Web katalog interaktif dengan animasi modern dan routing dinamis.",
+      "Interactive web catalog featuring dynamic routing and modern motion.",
     description:
-      "Project ini adalah aplikasi web katalog interaktif berbasis React dan TypeScript yang menampilkan makanan, minuman, dan jasa dengan routing dinamis, animasi modern menggunakan Framer Motion, desain responsif mobile-first, serta fitur interaktif seperti smart search, carousel, lightbox galeri, dan integrasi Web Share serta WhatsApp, dengan struktur modular dan fokus pada performa serta pengalaman pengguna yang halus.",
+      "An interactive web catalog application built with React and TypeScript designed to showcase food, beverages, and local services. Features dynamic routing, modern animations powered by Framer Motion, and a mobile-first responsive design. Includes smart search, interactive carousels, lightbox photo galleries, and seamless integrations with the native Web Share API and WhatsApp, all organized within a modular architecture focused on high performance and fluid user interactions.",
+    summary:
+      "An interactive web catalog built with React, TypeScript, and Framer Motion for local small businesses to showcase products with direct WhatsApp ordering and dynamic routing.",
     techStack: [
       { name: "Next.js", docs: "https://nextjs.org/docs" },
       { name: "React", docs: "https://react.dev/" },
@@ -37,15 +44,22 @@ export const projects: Project[] = [
     screenshots: ["/projects/umkm-i/umkm1.png", "/projects/umkm-i/umkm2.png"],
     year: "2025",
     category: "Web App",
+<<<<<<< HEAD
     route: "/projects/umkm-i",
     liveDemoUrl: "https://umkm-app-phi.vercel.app",
+=======
+    featured: true,
+>>>>>>> develop
   },
   {
     id: "absenku",
     title: "AbsenKu",
-    shortDesc: "Sistem presensi kampus berbasis GPS dan foto real-time.",
+    shortDesc:
+      "Campus attendance system powered by GPS geofencing and real-time photo verification.",
     description:
-      "AbsenKu adalah sistem presensi digital berbasis Laravel yang memvalidasi kehadiran mahasiswa secara real-time menggunakan kombinasi GPS Geofencing dan verifikasi foto wajah untuk mencegah titip absen. Aplikasi ini dirancang dengan arsitektur monolithic yang fokus pada kecepatan pengembangan dan kemudahan deployment, serta menyediakan fitur berbeda untuk setiap peran, mulai dari dashboard mobile-first dan smart check-in untuk mahasiswa, manajemen sesi fleksibel dan monitoring real-time untuk dosen, hingga kontrol master data terpusat bagi admin, dengan dukungan teknologi seperti Laravel, Blade, TailwindCSS, MySQL, Cloudinary, dan integrasi native browser API untuk kamera serta geolocation.",
+      "AbsenKu is a digital attendance system built with Laravel that validates university student presence in real time using browser GPS geofencing and facial photo verification to prevent proxy attendance. Engineered with a monolithic architecture focused on rapid development and straightforward deployment, it provides role-specific workflows: a mobile-first check-in dashboard for students, flexible session management and live monitoring for lecturers, and centralized master data administration for coordinators, backed by Laravel, Blade, Tailwind CSS, MySQL, Cloudinary, and native browser camera and geolocation APIs.",
+    summary:
+      "A campus attendance system engineered with Laravel and MySQL that uses browser GPS geofencing and real-time photo verification to prevent attendance fraud.",
     techStack: [
       { name: "Laravel", docs: "https://laravel.com/docs" },
       { name: "MySQL", docs: "https://dev.mysql.com/doc" },
@@ -61,6 +75,7 @@ export const projects: Project[] = [
     ],
     year: "2025",
     category: "Web App",
+<<<<<<< HEAD
     route: "/projects/absenku",
   },
   {
@@ -72,6 +87,19 @@ export const projects: Project[] = [
     description:
       "NusaKarya adalah website landing page modern yang dirancang sebagai ruang digital bagi generasi muda Indonesia untuk menemukan inspirasi, memahami pentingnya kontribusi sosial, dan menyampaikan ide atau aspirasi mereka. Website ini mengusung tema 'Berkarya Untuk Indonesia' dengan fokus pada pengalaman pengguna yang interaktif melalui animasi halus, navigasi berbasis section, serta form aspirasi yang tervalidasi. Dibangun menggunakan Next.js App Router dan TypeScript, proyek ini menerapkan pendekatan component-based architecture untuk menjaga maintainability dan reusability kode, didukung oleh Framer Motion untuk animasi, React Hook Form dan Zod untuk validasi form, serta Tailwind CSS untuk pengembangan antarmuka yang cepat dan konsisten. Seluruh aplikasi dideploy menggunakan Vercel sehingga mendukung proses deployment modern dan scalable.",
 
+=======
+    featured: true,
+  },
+  {
+    id: "portfolio",
+    title: "Portfolio Website",
+    shortDesc:
+      "Personal developer portfolio with neo-brutalist styling and responsive dual themes.",
+    description:
+      "Personal developer portfolio website built with Next.js and Tailwind CSS to showcase featured projects, technical capabilities, and direct contact channels. Features a high-contrast neo-brutalist visual design system, seamless light and dark mode toggling with persisted state, fluid motion craft, and fully responsive layouts across all viewports.",
+    summary:
+      "Personal portfolio website built with Next.js 16 (Turbopack), React 19, and Tailwind CSS v4, featuring high-contrast light and dark themes and accessible motion.",
+>>>>>>> develop
     techStack: [
       {
         name: "Next.js",
@@ -116,12 +144,33 @@ export const projects: Project[] = [
       "/projects/nusakarya/nusakarya-3.png",
       "/projects/nusakarya/nusakarya-4.png",
     ],
+<<<<<<< HEAD
 
     year: "2026",
 
     category: "Landing Page",
+=======
+    year: "2025",
+    category: "Frontend",
+    featured: false,
+>>>>>>> develop
   },
 ];
+
+export function getFeaturedProjects(): Project[] {
+  const featured = projects.filter((p) => p.featured);
+  return featured.length > 0 ? featured : projects.slice(0, 2);
+}
+
+export function getAllCategories(): string[] {
+  return Array.from(new Set(projects.map((p) => p.category)));
+}
+
+export function getAllTechnologies(): string[] {
+  const set = new Set<string>();
+  projects.forEach((p) => p.techStack.forEach((t) => set.add(t.name)));
+  return Array.from(set);
+}
 
 // Map tech name ke icon dari Simple Icons / devicons
 export const getProjectRoute = (project: Project) => project.route;

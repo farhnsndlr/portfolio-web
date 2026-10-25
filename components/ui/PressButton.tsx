@@ -5,14 +5,16 @@ import { ReactNode } from "react";
 type Props = HTMLMotionProps<"button"> & {
   children: ReactNode;
   className?: string;
+  variant?: "primary" | "secondary" | "neutral" | "ghost";
 };
 
-export function PressButton({ children, className, ...props }: Props) {
+export function PressButton({ children, className = "", variant = "neutral", ...props }: Props) {
   return (
     <motion.button
-      whileTap={{ scale: 0.93 }}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      className={className}
+      whileHover={{ x: -2, y: -2 }}
+      whileTap={{ x: 2, y: 2 }}
+      transition={{ type: "spring", stiffness: 450, damping: 25 }}
+      className={`cursor-pointer select-none font-bold uppercase transition-colors ${className}`}
       {...props}
     >
       {children}
@@ -26,12 +28,13 @@ type LinkProps = HTMLMotionProps<"a"> & {
   href?: string;
 };
 
-export function PressLink({ children, className, ...props }: LinkProps) {
+export function PressLink({ children, className = "", ...props }: LinkProps) {
   return (
     <motion.a
-      whileTap={{ scale: 0.93 }}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      className={className}
+      whileHover={{ x: -2, y: -2 }}
+      whileTap={{ x: 2, y: 2 }}
+      transition={{ type: "spring", stiffness: 450, damping: 25 }}
+      className={`cursor-pointer select-none font-bold uppercase transition-colors ${className}`}
       {...props}
     >
       {children}
