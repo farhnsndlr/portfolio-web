@@ -1,15 +1,6 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-<<<<<<< HEAD
-import Link from "next/link";
-import { projects, techIcons, getProjectRoute } from "@/data/projects";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-
-export default function Projects() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-=======
 import { useRouter } from "next/navigation";
 import { projects, techIcons } from "@/data/projects";
 import { ArrowUpRight, Github, ExternalLink, Code2 } from "lucide-react";
@@ -18,7 +9,6 @@ export default function Projects() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const router = useRouter();
->>>>>>> develop
 
   return (
     <section id="projects" className="py-20 md:py-28 px-4 sm:px-8 md:px-14 relative" ref={ref}>
@@ -40,12 +30,6 @@ export default function Projects() {
               </span>
             </div>
 
-<<<<<<< HEAD
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 items-stretch">
-        {projects.map((project, i) => (
-          <Link key={project.id} href={getProjectRoute(project)} className="group h-full">
-            <motion.div
-=======
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#171717] dark:text-white uppercase tracking-tight">
               FEATURED
               <br />
@@ -65,30 +49,10 @@ export default function Projects() {
           {projects.map((project, i) => (
             <motion.div
               key={project.id}
->>>>>>> develop
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 delay: 0.1 + i * 0.12,
-<<<<<<< HEAD
-                duration: 0.6,
-                ease: [0.23, 1, 0.32, 1],
-              }}
-              className="group cursor-pointer h-full"
-            >
-              <div className="relative h-full flex flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-500 hover:border-foreground/25 hover:shadow-lg hover:-translate-y-1">
-              <div className="relative w-full aspect-video overflow-hidden bg-foreground/8">
-                {project.heroImage ? (
-                  <img
-                    src={project.heroImage}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-foreground/20">
-                    <ExternalLink size={28} />
-                    <span className="text-xs tracking-wider">No preview</span>
-=======
                 duration: 0.5,
                 ease: [0.16, 1, 0.3, 1],
               }}
@@ -104,7 +68,6 @@ export default function Projects() {
                     <span className="text-[#171717]/60 dark:text-gray-400 text-[10px]">
                       [0{i + 1}]
                     </span>
->>>>>>> develop
                   </div>
                   <span className="text-[#171717] dark:text-[#FFE500] text-[10px]">
                     YEAR // {project.year}
@@ -203,16 +166,9 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-<<<<<<< HEAD
-            </div>
-          </motion.div>
-          </Link>
-        ))}
-=======
             </motion.div>
           ))}
         </div>
->>>>>>> develop
       </div>
     </section>
   );

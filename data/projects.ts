@@ -10,12 +10,10 @@ export type Project = {
   screenshots: string[];
   year: string;
   category: string;
-<<<<<<< HEAD
-  route: string;
+  route?: string;
   liveDemoUrl?: string;
-=======
   featured?: boolean;
->>>>>>> develop
+  layoutVariant?: "lead-overlap" | "reversed-split" | "typographic-stack";
 };
 
 export type TechItem = {
@@ -44,12 +42,10 @@ export const projects: Project[] = [
     screenshots: ["/projects/umkm-i/umkm1.png", "/projects/umkm-i/umkm2.png"],
     year: "2025",
     category: "Web App",
-<<<<<<< HEAD
     route: "/projects/umkm-i",
     liveDemoUrl: "https://umkm-app-phi.vercel.app",
-=======
     featured: true,
->>>>>>> develop
+    layoutVariant: "lead-overlap",
   },
   {
     id: "absenku",
@@ -75,20 +71,9 @@ export const projects: Project[] = [
     ],
     year: "2025",
     category: "Web App",
-<<<<<<< HEAD
     route: "/projects/absenku",
-  },
-  {
-    id: "nusakarya",
-    title: "NusaKarya",
-    shortDesc:
-      "Platform digital inspiratif untuk mendorong generasi muda Indonesia berkarya dan berkontribusi.",
-
-    description:
-      "NusaKarya adalah website landing page modern yang dirancang sebagai ruang digital bagi generasi muda Indonesia untuk menemukan inspirasi, memahami pentingnya kontribusi sosial, dan menyampaikan ide atau aspirasi mereka. Website ini mengusung tema 'Berkarya Untuk Indonesia' dengan fokus pada pengalaman pengguna yang interaktif melalui animasi halus, navigasi berbasis section, serta form aspirasi yang tervalidasi. Dibangun menggunakan Next.js App Router dan TypeScript, proyek ini menerapkan pendekatan component-based architecture untuk menjaga maintainability dan reusability kode, didukung oleh Framer Motion untuk animasi, React Hook Form dan Zod untuk validasi form, serta Tailwind CSS untuk pengembangan antarmuka yang cepat dan konsisten. Seluruh aplikasi dideploy menggunakan Vercel sehingga mendukung proses deployment modern dan scalable.",
-
-=======
     featured: true,
+    layoutVariant: "reversed-split",
   },
   {
     id: "portfolio",
@@ -99,61 +84,56 @@ export const projects: Project[] = [
       "Personal developer portfolio website built with Next.js and Tailwind CSS to showcase featured projects, technical capabilities, and direct contact channels. Features a high-contrast neo-brutalist visual design system, seamless light and dark mode toggling with persisted state, fluid motion craft, and fully responsive layouts across all viewports.",
     summary:
       "Personal portfolio website built with Next.js 16 (Turbopack), React 19, and Tailwind CSS v4, featuring high-contrast light and dark themes and accessible motion.",
->>>>>>> develop
     techStack: [
-      {
-        name: "Next.js",
-        docs: "https://nextjs.org/docs",
-      },
-      {
-        name: "React",
-        docs: "https://react.dev",
-      },
-      {
-        name: "TypeScript",
-        docs: "https://www.typescriptlang.org/docs",
-      },
-      {
-        name: "Tailwind CSS",
-        docs: "https://tailwindcss.com/docs",
-      },
-      {
-        name: "Framer Motion",
-        docs: "https://www.framer.com/motion",
-      },
-      {
-        name: "React Hook Form",
-        docs: "https://react-hook-form.com",
-      },
-      {
-        name: "Zod",
-        docs: "https://zod.dev",
-      },
+      { name: "Next.js", docs: "https://nextjs.org/docs" },
+      { name: "TypeScript", docs: "https://www.typescriptlang.org/docs" },
+      { name: "Tailwind CSS", docs: "https://tailwindcss.com/docs" },
+      { name: "Framer Motion", docs: "https://www.framer.com/motion" },
     ],
-
+    github: "https://github.com/farhnsndlr/portfolio-web",
+    heroImage: "/projects/portfolio/portfolio_thumbnail.png",
+    screenshots: [
+      "/projects/portfolio/portfolio1.png",
+      "/projects/portfolio/portfolio3.png",
+    ],
+    year: "2025",
+    category: "Frontend",
+    route: "/projects/portfolio",
+    featured: false,
+    layoutVariant: "typographic-stack",
+  },
+  {
+    id: "nusakarya",
+    title: "NusaKarya",
+    shortDesc:
+      "Inspirational digital platform encouraging Indonesian youth to create and contribute.",
+    description:
+      "NusaKarya is a modern landing page designed as an inspirational digital space for Indonesian youth to discover creative initiatives, understand the value of social contributions, and submit their ideas. Featuring an interactive user experience with smooth Framer Motion animations, section-based navigation, and validated aspiration forms using React Hook Form and Zod, built with Next.js App Router and Tailwind CSS for maintainability and scalability.",
+    summary:
+      "An inspirational landing page platform built with Next.js, Framer Motion, and Zod form validation for youth empowerment in Indonesia.",
+    techStack: [
+      { name: "Next.js", docs: "https://nextjs.org/docs" },
+      { name: "React", docs: "https://react.dev" },
+      { name: "TypeScript", docs: "https://www.typescriptlang.org/docs" },
+      { name: "Tailwind CSS", docs: "https://tailwindcss.com/docs" },
+      { name: "Framer Motion", docs: "https://www.framer.com/motion" },
+      { name: "React Hook Form", docs: "https://react-hook-form.com" },
+      { name: "Zod", docs: "https://zod.dev" },
+    ],
     github: "https://github.com/farhnsndlr/nusakarya-web",
     route: "/projects/nusakarya",
     liveDemoUrl: "https://nusakarya-sooty.vercel.app/",
-
-    heroImage:
-      "/projects/nusakarya/nusakarya-thumbnail.png",
-
+    heroImage: "/projects/nusakarya/nusakarya-thumbnail.png",
     screenshots: [
       "/projects/nusakarya/nusakarya-1.png",
       "/projects/nusakarya/nusakarya-2.png",
       "/projects/nusakarya/nusakarya-3.png",
       "/projects/nusakarya/nusakarya-4.png",
     ],
-<<<<<<< HEAD
-
     year: "2026",
-
     category: "Landing Page",
-=======
-    year: "2025",
-    category: "Frontend",
     featured: false,
->>>>>>> develop
+    layoutVariant: "lead-overlap",
   },
 ];
 
@@ -172,9 +152,10 @@ export function getAllTechnologies(): string[] {
   return Array.from(set);
 }
 
-// Map tech name ke icon dari Simple Icons / devicons
-export const getProjectRoute = (project: Project) => project.route;
+export const getProjectRoute = (project: Project) =>
+  project.route || `/projects/${project.id}`;
 
+// Map tech name to icon from Simple Icons / devicons
 export const techIcons: Record<string, string> = {
   Laravel: "https://cdn.simpleicons.org/laravel",
   PHP: "https://cdn.simpleicons.org/php",

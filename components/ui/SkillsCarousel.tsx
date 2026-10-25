@@ -8,15 +8,9 @@ import {
   SiGit,
   SiJavascript,
   SiReact,
-<<<<<<< HEAD
-  SiPostgresql,
-  SiLinux,
-  SiDocker,
-=======
   SiNextdotjs,
   SiTypescript,
   SiTailwindcss,
->>>>>>> develop
 } from "react-icons/si";
 
 const skills = [
@@ -33,52 +27,18 @@ const skills = [
 
 export default function SkillsCarousel() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-<<<<<<< HEAD
-
-  const skills = [
-    { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
-    { name: "PHP", icon: SiPhp, color: "#777BB4" },
-    { name: "MySQL", icon: SiMysql, color: "#00758F" },
-    { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
-    { name: "Git", icon: SiGit, color: "#F05032" },
-    { name: "Linux", icon: SiLinux, color: "#FCC624" },
-    { name: "Docker", icon: SiDocker, color: "#2496ED" },
-    { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-    { name: "React", icon: SiReact, color: "#61DAFB" },
-  ];
-
-  const duplicated = [...skills, ...skills];
-
-  return (
-    <section className="py-10 overflow-hidden">
-      <style>{`
-        @keyframes marquee {
-          from { transform: translate3d(0, 0, 0); }
-          to { transform: translate3d(-50%, 0, 0); }
-        }
-        .marquee-track {
-          animation: marquee 20s linear infinite;
-          will-change: transform;
-        }
-        .marquee-track.paused {
-          animation-play-state: paused;
-        }
-      `}</style>
-
-      <div className="relative flex justify-center">
-        <div className="relative overflow-hidden w-full max-w-5xl px-14 py-5 rounded-full border border-foreground/10 backdrop-blur-2xl bg-foreground/5">
-          <div
-            className={`marquee-track flex w-max items-center ${
-=======
   const duplicated = [...skills, ...skills, ...skills];
 
   return (
-    <div className="w-full overflow-hidden select-none py-2" role="region" aria-label="Technical skills registry">
+    <div
+      className="w-full overflow-hidden select-none py-2"
+      role="region"
+      aria-label="Technical skills registry"
+    >
       <div className="relative flex justify-center w-full">
         <div className="w-full overflow-hidden">
           <div
             className={`marquee-tech-track flex w-max items-center py-2 gap-3 ${
->>>>>>> develop
               hoveredIndex !== null ? "paused" : ""
             }`}
           >

@@ -3,17 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const apiKey = process.env.RESEND_API_KEY;
-
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: "RESEND_API_KEY is not configured" },
-        { status: 500 }
-      );
-    }
-
-    const resend = new Resend(apiKey);
-
     const { name, email, message } = await req.json();
 
     if (!name || !email || !message) {

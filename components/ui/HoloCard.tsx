@@ -75,39 +75,6 @@ export default function HoloCard({
           willChange: "transform",
         }}
       >
-<<<<<<< HEAD
-        {/* Avatar */}
-        <img
-          src={avatarUrl}
-          alt={name}
-          draggable={false}
-          onDragStart={(e) => e.preventDefault()}
-          className="absolute left-0 right-0 w-full object-cover object-top pointer-events-none"
-          style={{
-            top: "88px",
-            bottom: "72px",
-            height: "calc(100% - 88px - 72px)",
-            filter: "grayscale(100%) contrast(1.1) brightness(0.85)",
-          }}
-        />
-
-        {/* Icon pattern background — subtle */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-
-        {/* Top — nama & title */}
-        <div className="absolute top-0 left-0 right-0 p-6 text-center">
-          <h3 className="text-white/90 font-semibold text-xl leading-tight tracking-wide">
-            {name}
-          </h3>
-          <p className="text-white/40 text-sm mt-1.5 tracking-[0.2em] uppercase">
-            {title}
-          </p>
-=======
         {/* Top Header Badge */}
         <div className="flex items-center justify-between px-3.5 py-2 bg-[#FFE500] text-[#171717] border-b-2 border-[#171717] font-mono text-xs font-black uppercase tracking-wider">
           <div className="flex items-center gap-1.5">
@@ -115,7 +82,6 @@ export default function HoloCard({
             <span>ID.CARD // DEV-01</span>
           </div>
           <span className="text-[10px] font-bold">2026 // OK</span>
->>>>>>> develop
         </div>
 
         {/* Card Body */}

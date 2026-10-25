@@ -48,7 +48,7 @@ export default function Navbar() {
 
   const handleMobileNav = (id: string) => {
     setSidebarOpen(false);
-    setTimeout(() => scrollTo(href), 200);
+    setTimeout(() => scrollTo(id), 200);
   };
 
   const triggerPalette = () => {
