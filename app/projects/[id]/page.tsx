@@ -26,10 +26,10 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL("https://nadlr.my.id"),
-    title: `${project.title} — Farhan Sultan Nadlir`,
+    title: `${project.title} — NADLR.`,
     description: project.shortDesc,
     openGraph: {
-      title: `${project.title} — Farhan Sultan Nadlir`,
+      title: `${project.title} — NADLR.`,
       description: project.shortDesc,
       images: project.heroImage ? [{ url: project.heroImage }] : [],
     },
@@ -112,11 +112,11 @@ export default async function ProjectDetail({
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-foreground mb-4">
+          <h1 className="text-project-title uppercase text-foreground mb-4">
             {project.title}
           </h1>
 
-          <p className="text-sm sm:text-base font-bold text-foreground leading-relaxed border-l-4 border-[#FFE500] pl-4 mb-8">
+          <p className="text-body-lead font-bold text-foreground border-l-4 border-[#FFE500] pl-4 mb-8">
             {project.shortDesc}
           </p>
 
@@ -124,10 +124,10 @@ export default async function ProjectDetail({
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 border-t-2 border-border">
             {/* Left 8 Cols: Description */}
             <div className="md:col-span-8 space-y-3">
-              <span className="text-xs font-black text-muted-foreground uppercase block">
+              <span className="text-meta-mono text-muted-foreground block">
                 About the Project:
               </span>
-              <p className="text-xs sm:text-sm font-sans font-medium text-foreground/85 leading-relaxed">
+              <p className="text-body text-foreground/85">
                 {project.description}
               </p>
             </div>

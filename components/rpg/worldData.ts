@@ -160,7 +160,7 @@ export const WORLD_ENTITIES: Entity[] = [
     ],
     actions: [
       {
-        label: "OPEN WHATSAPP CHAT (+62 851 5539 9057)",
+        label: "OPEN WHATSAPP CHAT (+62 815 7402 9222)",
         actionType: "link",
         payload: "https://wa.me/6285155399057",
       },

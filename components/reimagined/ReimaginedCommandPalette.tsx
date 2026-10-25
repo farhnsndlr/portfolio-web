@@ -197,11 +197,11 @@ export default function ReimaginedCommandPalette() {
       id: "act-whatsapp",
       category: "Actions",
       label: "Dispatch WhatsApp Message",
-      detail: "+62 851 5539 9057",
+      detail: "+62 815 7402 9222",
       icon: ExternalLink,
       action: () => {
         setIsOpen(false);
-        window.open("https://wa.me/6285155399057", "_blank");
+        window.open("https://wa.me/6281574029222", "_blank");
       },
     },
     {
@@ -266,7 +266,7 @@ export default function ReimaginedCommandPalette() {
             <div className="flex items-center justify-between px-5 py-3 bg-[#FFE500] text-[#171717] border-b-2 border-border text-xs">
               <div className="flex items-center gap-2 font-black">
                 <span className="w-2.5 h-2.5 bg-[#171717] border border-border" />
-                <span>COMMAND_CENTER // BRUTAL IMPACT</span>
+                <span>NADLR. // COMMAND_CENTER</span>
               </div>
               <button
                 onClick={() => setIsOpen(false)}

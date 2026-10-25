@@ -205,11 +205,11 @@ export default function CommandPalette() {
       id: "act-whatsapp",
       category: "Actions",
       label: "Dispatch WhatsApp Message",
-      detail: "+62 851 5539 9057",
+      detail: "+62 815 7402 9222",
       icon: ExternalLink,
       action: () => {
         setIsOpen(false);
-        window.open("https://wa.me/6285155399057", "_blank");
+        window.open("https://wa.me/6281574029222", "_blank");
       },
     },
 

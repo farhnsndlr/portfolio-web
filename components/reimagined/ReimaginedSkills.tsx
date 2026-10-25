@@ -242,7 +242,7 @@ export default function ReimaginedSkills() {
             <span className="text-xs font-black text-muted-foreground uppercase tracking-widest block mb-2">
               Capabilities &amp; Stack
             </span>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase text-foreground tracking-tight leading-none">
+            <h2 className="text-display-section text-foreground leading-none">
               TECH <span className="bg-[#FFE500] text-[#171717] px-2.5 inline-block">STACK</span>
             </h2>
           </div>

@@ -201,7 +201,7 @@ export default function ModernContact() {
                     WhatsApp Direct
                   </span>
                   <span className="font-mono text-xs text-[#8A8D98]">
-                    +62 851 5539 9057
+                    +62 815 7402 9222
                   </span>
                 </div>
               </div>

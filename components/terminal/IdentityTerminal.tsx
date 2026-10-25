@@ -217,7 +217,7 @@ export default function IdentityTerminal() {
                   rel="noreferrer"
                   className="text-[#B8FF3B] hover:underline font-bold"
                 >
-                  +62 851 5539 9057 ↗
+                  +62 815 7402 9222 ↗
                 </a>
               </p>
               <p>

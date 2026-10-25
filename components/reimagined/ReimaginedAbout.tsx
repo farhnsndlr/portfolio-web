@@ -33,7 +33,7 @@ export default function ReimaginedAbout() {
             <span className="text-xs font-black text-muted-foreground uppercase block mb-1">
               Background &amp; Profile
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase text-foreground tracking-tight">
+            <h2 className="text-display-section text-foreground leading-none">
               About <span className="bg-[#FFE500] text-[#171717] px-2">Farhan</span>
             </h2>
           </div>

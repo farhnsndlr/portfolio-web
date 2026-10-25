@@ -25,13 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <head>
-        <title>Farhan Sultan Nadlir — Web Developer Portfolio</title>
+        <title>NADLR.</title>
         <meta
           name="description"
-          content="Personal portfolio of Farhan Sultan Nadlir, an Information Systems student based in Indonesia building web applications with Next.js, React, and Laravel."
+          content="Official portfolio of NADLR. (Farhan Sultan Nadlir), an Information Systems student and developer based in Indonesia building web applications with Next.js, React, and Laravel."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body
         className={`${inter.className} bg-background text-foreground relative transition-colors duration-150 antialiased min-h-screen selection:bg-[#FFE500] selection:text-[#171717]`}

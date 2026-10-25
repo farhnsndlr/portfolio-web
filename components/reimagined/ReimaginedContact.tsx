@@ -13,6 +13,7 @@ import {
   XCircle,
   MapPin,
 } from "lucide-react";
+import NadlrLogo from "@/components/brand/NadlrLogo";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
@@ -71,13 +72,13 @@ export default function ReimaginedContact() {
       <div className="max-w-7xl mx-auto">
         {/* Bold Neo Yellow Heading Block */}
         <div className="p-8 sm:p-12 bg-[#FFE500] text-[#171717] border-[3.5px] border-border shadow-neo-xl mb-12">
-          <span className="text-xs font-black uppercase tracking-wider block mb-2 opacity-80">
+          <span className="text-meta-badge block mb-2 opacity-80">
             Contact Farhan
           </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-tight mb-4">
+          <h2 className="text-display-section leading-tight mb-4 tracking-tight">
             Have a project in mind, or just want to say hi?
           </h2>
-          <p className="text-sm sm:text-base md:text-lg font-sans font-medium max-w-2xl leading-relaxed">
+          <p className="text-body-lead max-w-2xl">
             I am always open to discussing new projects, internship opportunities, or frontend/backend architecture questions. Send a note below or reach out directly on WhatsApp.
           </p>
         </div>
@@ -100,7 +101,7 @@ export default function ReimaginedContact() {
               >
                 <div className="flex items-center gap-2.5">
                   <MessageCircle size={16} />
-                  <span>WhatsApp (+62 851 5539 9057)</span>
+                  <span>WhatsApp (+62 815 7402 9222)</span>
                 </div>
                 <ArrowUpRight size={15} />
               </a>
@@ -225,14 +226,16 @@ export default function ReimaginedContact() {
           </div>
         </div>
 
-        {/* Clean Human Footer */}
-        <footer className="mt-24 pt-8 border-t-[2.5px] border-border flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted-foreground font-bold">
-          <div>
-            <span>Farhan Sultan Nadlir · nadlr.my.id</span>
+        {/* Clean Human Footer with Official NADLR. Brand */}
+        <footer className="mt-24 pt-8 border-t-[2.5px] border-border flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-muted-foreground font-bold">
+          <div className="flex items-center gap-3">
+            <NadlrLogo variant="full" size="sm" href="/" />
+            <span className="text-muted-foreground/60 hidden sm:inline">|</span>
+            <span className="text-xs">nadlr.my.id</span>
           </div>
 
-          <p className="text-center sm:text-right">
-            &copy; {new Date().getFullYear()} Farhan Sultan Nadlir.
+          <p className="text-center sm:text-right text-xs">
+            &copy; {new Date().getFullYear()} Farhan Sultan Nadlir. All rights reserved.
           </p>
         </footer>
       </div>

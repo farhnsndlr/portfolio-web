@@ -208,11 +208,11 @@ export default function ProjectsArchiveClient() {
           <span className="text-xs font-black text-muted-foreground uppercase tracking-widest block mb-2">
             Complete Index
           </span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase text-foreground tracking-tight leading-none mb-4">
+          <h1 className="text-display-section text-foreground leading-none mb-4">
             PROJECT <span className="bg-[#FFE500] text-[#171717] px-2.5 inline-block">ARCHIVE</span>
           </h1>
-          <p className="text-sm sm:text-base font-sans font-medium text-muted-foreground max-w-2xl leading-relaxed">
-            Full collection of web applications, student projects, and frontend interfaces built by Farhan Sultan Nadlir. Filter by technology or search by keyword below.
+          <p className="text-body-lead text-muted-foreground max-w-2xl">
+            Full collection of web applications, student projects, and frontend interfaces built under NADLR. by Farhan Sultan Nadlir. Filter by technology or search by keyword below.
           </p>
         </div>
 

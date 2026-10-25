@@ -188,7 +188,7 @@ export default function PixelContact() {
             >
               <div className="flex items-center gap-2">
                 <MessageCircle size={18} />
-                <span>WHATSAPP DIRECT (+62 851 5539 9057)</span>
+                <span>WHATSAPP DIRECT (+62 815 7402 9222)</span>
               </div>
               <ArrowUpRight size={14} />
             </a>

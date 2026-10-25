@@ -23,9 +23,9 @@ export const projects: Project[] = [
     id: "umkm-i",
     title: "UMKM-i",
     shortDesc:
-      "Web katalog interaktif dengan animasi modern dan routing dinamis.",
+      "Interactive web catalog featuring dynamic routing and modern motion.",
     description:
-      "Project ini adalah aplikasi web katalog interaktif berbasis React dan TypeScript yang menampilkan makanan, minuman, dan jasa dengan routing dinamis, animasi modern menggunakan Framer Motion, desain responsif mobile-first, serta fitur interaktif seperti smart search, carousel, lightbox galeri, dan integrasi Web Share serta WhatsApp, dengan struktur modular dan fokus pada performa serta pengalaman pengguna yang halus.",
+      "An interactive web catalog application built with React and TypeScript designed to showcase food, beverages, and local services. Features dynamic routing, modern animations powered by Framer Motion, and a mobile-first responsive design. Includes smart search, interactive carousels, lightbox photo galleries, and seamless integrations with the native Web Share API and WhatsApp, all organized within a modular architecture focused on high performance and fluid user interactions.",
     summary:
       "An interactive web catalog built with React, TypeScript, and Framer Motion for local small businesses to showcase products with direct WhatsApp ordering and dynamic routing.",
     techStack: [
@@ -44,9 +44,10 @@ export const projects: Project[] = [
   {
     id: "absenku",
     title: "AbsenKu",
-    shortDesc: "Sistem presensi kampus berbasis GPS dan foto real-time.",
+    shortDesc:
+      "Campus attendance system powered by GPS geofencing and real-time photo verification.",
     description:
-      "AbsenKu adalah sistem presensi digital berbasis Laravel yang memvalidasi kehadiran mahasiswa secara real-time menggunakan kombinasi GPS Geofencing dan verifikasi foto wajah untuk mencegah titip absen. Aplikasi ini dirancang dengan arsitektur monolithic yang fokus pada kecepatan pengembangan dan kemudahan deployment, serta menyediakan fitur berbeda untuk setiap peran, mulai dari dashboard mobile-first dan smart check-in untuk mahasiswa, manajemen sesi fleksibel dan monitoring real-time untuk dosen, hingga kontrol master data terpusat bagi admin, dengan dukungan teknologi seperti Laravel, Blade, TailwindCSS, MySQL, Cloudinary, dan integrasi native browser API untuk kamera serta geolocation.",
+      "AbsenKu is a digital attendance system built with Laravel that validates university student presence in real time using browser GPS geofencing and facial photo verification to prevent proxy attendance. Engineered with a monolithic architecture focused on rapid development and straightforward deployment, it provides role-specific workflows: a mobile-first check-in dashboard for students, flexible session management and live monitoring for lecturers, and centralized master data administration for coordinators, backed by Laravel, Blade, Tailwind CSS, MySQL, Cloudinary, and native browser camera and geolocation APIs.",
     summary:
       "A campus attendance system engineered with Laravel and MySQL that uses browser GPS geofencing and real-time photo verification to prevent attendance fraud.",
     techStack: [
@@ -69,9 +70,10 @@ export const projects: Project[] = [
   {
     id: "portfolio",
     title: "Portfolio Website",
-    shortDesc: "Personal portfolio dengan animasi dan dark mode support.",
+    shortDesc:
+      "Personal developer portfolio with neo-brutalist styling and responsive dual themes.",
     description:
-      "Website portfolio personal yang dibangun dengan Next.js dan Tailwind CSS. Menampilkan projects, skills, dan informasi kontak dengan desain modern. Dilengkapi dark/light mode dengan ripple transition effect dan animasi marquee untuk skills carousel.",
+      "Personal developer portfolio website built with Next.js and Tailwind CSS to showcase featured projects, technical capabilities, and direct contact channels. Features a high-contrast neo-brutalist visual design system, seamless light and dark mode toggling with persisted state, fluid motion craft, and fully responsive layouts across all viewports.",
     summary:
       "Personal portfolio website built with Next.js 16 (Turbopack), React 19, and Tailwind CSS v4, featuring high-contrast light and dark themes and accessible motion.",
     techStack: [

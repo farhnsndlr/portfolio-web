@@ -22,19 +22,29 @@ export default function ReimaginedHero() {
     <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-8 md:px-14 pt-28 pb-16 overflow-hidden font-mono bg-background text-foreground">
       <div className="max-w-7xl mx-auto w-full">
         {/* Massive Typographic Headline */}
-        <div className="mb-8">
-          <div className="inline-block px-3 py-1 bg-[#FFE500] text-[#171717] font-black text-xs uppercase border-2 border-border shadow-neo-sm mb-4">
-            Information Systems Student &amp; Web Developer
+        <div className="mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-card text-foreground font-mono font-bold text-xs uppercase border-2 border-border shadow-neo-sm mb-4">
+            <span className="w-2 h-2 bg-[#FFE500] border border-border inline-block" />
+            <span>Information Systems Student &amp; Web Developer</span>
           </div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-black uppercase tracking-tight leading-[0.88] text-foreground"
+            className="font-sans select-none tracking-tight"
           >
-            FARHAN SULTAN <br />
-            <span className="bg-[#FFE500] text-[#171717] px-2 inline-block mt-1">NADLIR.</span>
+            <span className="block text-display-hero text-foreground">
+              FARHAN SULTAN
+            </span>
+            <div className="flex items-center gap-3 mt-2 sm:mt-3 flex-wrap">
+              <span className="text-[clamp(2.25rem,6.5vw,5rem)] font-black font-sans leading-none bg-[#FFE500] text-[#171717] px-3 sm:px-4 py-0.5 border-[3.5px] border-border shadow-neo-lg inline-block">
+                NADLR.
+              </span>
+              <span className="text-xs sm:text-sm font-mono font-bold tracking-wider text-muted-foreground uppercase border-l-2 border-border pl-3 py-1">
+                Full-Stack Web Architect
+              </span>
+            </div>
           </motion.h1>
         </div>
 
@@ -42,7 +52,7 @@ export default function ReimaginedHero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Natural Bio & Actions (7 Cols) */}
           <div className="lg:col-span-7 space-y-6">
-            <p className="text-base sm:text-lg md:text-xl font-sans font-medium text-foreground/85 leading-relaxed max-w-2xl">
+            <p className="text-body-lead text-foreground/85 max-w-2xl">
               I design and build full-stack web applications, mostly with Next.js, React, TypeScript, and Laravel. I care about solid system architecture, clean relational databases, and snappy user interfaces.
             </p>
 

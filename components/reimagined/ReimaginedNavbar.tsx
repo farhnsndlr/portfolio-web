@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
+import NadlrLogo from "@/components/brand/NadlrLogo";
 import { Menu, X, FileText, ArrowUpRight, Search } from "lucide-react";
 
 const navLinks = [
@@ -81,23 +82,10 @@ export default function ReimaginedNavbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Real Name Brand Mark */}
-        <Link
-          href="/"
-          onClick={(e) => {
-            if (window.location.pathname === "/") {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          className="flex items-center gap-2.5 group cursor-pointer"
-          aria-label="Farhan Sultan Nadlir homepage"
-        >
-          <div className="w-3.5 h-3.5 bg-[#FFE500] border-2 border-border shadow-neo-sm group-hover:rotate-45 transition-transform" />
-          <span className="font-black text-xs sm:text-sm tracking-tight text-foreground uppercase">
-            Farhan Sultan Nadlir
-          </span>
-        </Link>
+        {/* Official Brand Logo: NADLR. */}
+        <div className="flex items-center">
+          <NadlrLogo variant="full" size="sm" href="/" />
+        </div>
 
         {/* Desktop Navigation Links */}
         <nav
