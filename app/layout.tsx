@@ -7,6 +7,7 @@ import PageTransition from "@/components/ui/PageTransition";
 import BackToTop from "@/components/ui/BackToTop";
 import ReimaginedCommandPalette from "@/components/reimagined/ReimaginedCommandPalette";
 import ReimaginedNavbar from "@/components/reimagined/ReimaginedNavbar";
+import NadlrSplashScreen from "@/components/brand/NadlrSplashScreen";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +39,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-background text-foreground relative transition-colors duration-150 antialiased min-h-screen selection:bg-[#FFE500] selection:text-[#171717]`}
       >
+        {/* Initial First-Load Brand Splash Animation (Session-Aware) */}
+        <NadlrSplashScreen />
+
         {/* Top Reading Progress Bar */}
         <motion.div
           style={{ scaleX }}
