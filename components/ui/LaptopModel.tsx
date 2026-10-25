@@ -15,6 +15,9 @@ function Laptop() {
 
   useFrame((state) => {
     if (!ref.current) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
     ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.3;
     ref.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.04;
   });

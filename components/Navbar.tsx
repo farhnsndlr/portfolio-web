@@ -1,35 +1,26 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ClickSpark from "@/components/ui/ClickSpark";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
-import { useScrollTransition } from "@/hooks/useScrollTransition";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search, FileText, ArrowUpRight } from "lucide-react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Constellation", href: "#constellation", id: "01" },
+  { label: "Terminal", href: "#terminal", id: "02" },
+  { label: "Dossier", href: "#about", id: "03" },
+  { label: "Contact", href: "#contact", id: "04" },
 ];
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("");
-  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const navRef = useRef<HTMLDivElement>(null);
-  const { scrollTo } = useScrollTransition();
 
   useEffect(() => {
-    const sectionIds = ["about", "projects", "contact"];
+    const sectionIds = ["constellation", "terminal", "about", "contact"];
     const handleScroll = () => {
-      if (window.scrollY < 100) {
-        setActiveSection("");
-        return;
-      }
-      let current = "",
-        minDistance = Infinity;
+      let current = "";
+      let minDistance = Infinity;
       sectionIds.forEach((id) => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -42,172 +33,115 @@ export default function Navbar() {
       });
       setActiveSection(current);
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const activeIndex = navLinks.findIndex((l) => l.href === activeSection);
-    if (activeIndex === -1 || !navRef.current) {
-      setUnderlineStyle({ left: 0, width: 0 });
-      return;
+  const scrollTo = (href: string) => {
+    const target = document.querySelector(href) as HTMLElement;
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
     }
-    const linkEl = linkRefs.current[activeIndex];
-    const navEl = navRef.current;
-    if (!linkEl) return;
-    const navRect = navEl.getBoundingClientRect();
-    const linkRect = linkEl.getBoundingClientRect();
-    setUnderlineStyle({
-      left: linkRect.left - navRect.left,
-      width: linkRect.width,
-    });
-  }, [activeSection]);
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 768) setSidebarOpen(false);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  };
 
   const handleMobileNav = (href: string) => {
     setSidebarOpen(false);
-    setTimeout(() => scrollTo(href), 300);
+    setTimeout(() => scrollTo(href), 200);
+  };
+
+  const triggerPalette = () => {
+    window.dispatchEvent(new CustomEvent("open-command-palette"));
   };
 
   return (
     <>
-      {/* ── DESKTOP NAVBAR ── */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(8px)" }}
-        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed top-6 left-1/2 -translate-x-1/2
-          backdrop-blur-md bg-black/10 dark:bg-white/10
-          border border-black/10 dark:border-white/20
-          px-8 py-3 rounded-full
-          hidden md:flex items-center gap-16
-          w-auto z-50"
-      >
-        <motion.span
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-          className="font-bold tracking-[0.25em] text-sm text-foreground"
-        >
-          <ClickSpark>
-            <motion.a
-              href="/"
-              whileTap={{ scale: 0.93 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="block"
-            >
+      {/* ── DESKTOP HUD NAVIGATION ── */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 md:px-14 py-3 bg-[#111312]/85 dark:bg-[#111312]/85 backdrop-blur-md border-b border-[#262D28] text-[#F3F4EF] select-none">
+        <div className="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
+          {/* Logo Brand Stamp */}
+          <a
+            href="/"
+            className="flex items-center gap-2 group cursor-pointer"
+          >
+            <div className="w-2.5 h-2.5 bg-[#B8FF3B] group-hover:scale-125 transition-transform" />
+            <span className="font-black text-sm tracking-widest text-[#F3F4EF] group-hover:text-[#B8FF3B] transition-colors">
               NADLR
-            </motion.a>
-          </ClickSpark>
-        </motion.span>
+            </span>
+            <span className="text-[10px] text-[#777D76] hidden sm:inline">
+              // RUNTIME_V2.0
+            </span>
+          </a>
 
-        <div
-          ref={navRef}
-          className="relative flex items-center gap-8 text-sm tracking-widest text-foreground"
-        >
-          {navLinks.map(({ label, href }, i) => (
-            <motion.div
-              key={href}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.35 + i * 0.08,
-                duration: 0.4,
-                ease: "easeOut",
-              }}
-            >
-              <ClickSpark>
-                <motion.a
+          {/* Desktop Nav Items */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map(({ label, href, id }) => {
+              const isActive = activeSection === href;
+              return (
+                <a
+                  key={href}
                   href={href}
-                  ref={(el) => {
-                    linkRefs.current[i] = el;
-                  }}
                   onClick={(e) => {
                     e.preventDefault();
                     scrollTo(href);
                   }}
-                  whileTap={{ scale: 0.93 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="relative transition-colors duration-300 cursor-pointer"
-                  style={{
-                    color:
-                      activeSection === href
-                        ? "var(--foreground)"
-                        : hoveredIndex === i
-                          ? "color-mix(in oklch, var(--foreground) 80%, transparent)"
-                          : "color-mix(in oklch, var(--foreground) 50%, transparent)",
-                  }}
-                  onMouseEnter={() => setHoveredIndex(i)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`px-3 py-1.5 transition-colors border ${
+                    isActive
+                      ? "border-[#B8FF3B] bg-[#B8FF3B]/10 text-[#B8FF3B] font-bold"
+                      : "border-transparent text-[#777D76] hover:text-[#F3F4EF] hover:border-[#262D28]"
+                  }`}
                 >
-                  <motion.span
-                    className="absolute inset-0 -mx-3 -my-1 rounded-full bg-foreground/8 blur-sm"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{
-                      opacity: hoveredIndex === i ? 1 : 0,
-                      scale: hoveredIndex === i ? 1 : 0.8,
-                    }}
-                    transition={{ duration: 0.2 }}
-                  />
-                  <span className="relative">{label}</span>
-                </motion.a>
-              </ClickSpark>
-            </motion.div>
-          ))}
-          <motion.span
-            className="absolute -bottom-1 h-[1.5px] bg-foreground rounded-full"
-            animate={{
-              left: underlineStyle.left,
-              width: activeSection ? underlineStyle.width : 0,
-              opacity: activeSection ? 1 : 0,
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          />
+                  <span className="text-[10px] opacity-60 mr-1.5">[{id}]</span>
+                  <span>{label.toUpperCase()}</span>
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Right Action Cluster */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Quick Command Palette Launcher */}
+            <button
+              onClick={triggerPalette}
+              className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 bg-[#181C1A] border border-[#262D28] text-[#777D76] hover:border-[#B8FF3B] hover:text-[#B8FF3B] transition-colors cursor-pointer text-xs"
+              title="Open Command Palette"
+            >
+              <Search size={13} className="text-[#B8FF3B]" />
+              <span>SEARCH</span>
+              <kbd className="text-[9px] px-1 bg-[#111312] border border-[#262D28] text-[#B8FF3B]">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Resume Link */}
+            <a
+              href="/CV_Farhan_Sultan_Nadlir.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 border border-[#262D28] text-[#777D76] hover:text-[#F3F4EF] hover:border-[#B8FF3B] transition-colors text-xs"
+            >
+              <FileText size={13} />
+              <span>CV</span>
+              <ArrowUpRight size={11} />
+            </a>
+
+            {/* Theme Switcher */}
+            <DarkModeToggle />
+
+            {/* Mobile Menu Trigger */}
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden p-2 border border-[#262D28] bg-[#181C1A] text-[#F3F4EF] hover:border-[#B8FF3B] cursor-pointer"
+              aria-label="Open mobile navigation"
+            >
+              <Menu size={18} />
+            </button>
+          </div>
         </div>
+      </header>
 
-        <motion.div
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
-        >
-          <DarkModeToggle />
-        </motion.div>
-      </motion.nav>
-
-      {/* ── MOBILE TOPBAR ── */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center justify-between px-5 py-4 backdrop-blur-md bg-background/80 border-b border-foreground/10"
-      >
-        <a
-          href="/"
-          className="font-bold tracking-[0.25em] text-sm text-foreground"
-        >
-          NADLR
-        </a>
-        <div className="flex items-center gap-3">
-          <DarkModeToggle />
-          <motion.button
-            onClick={() => setSidebarOpen(true)}
-            whileTap={{ scale: 0.9 }}
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-all cursor-pointer"
-          >
-            <Menu size={16} />
-          </motion.button>
-        </div>
-      </motion.div>
-
-      {/* ── MOBILE SIDEBAR ── */}
+      {/* ── MOBILE HUD DRAWER ── */}
       <AnimatePresence>
         {sidebarOpen && (
           <>
@@ -217,78 +151,90 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.15 }}
               onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-xs md:hidden"
             />
 
-            {/* Sidebar panel */}
+            {/* Drawer Panel */}
             <motion.div
               key="sidebar"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 z-[70] w-72 bg-background border-l border-foreground/10 flex flex-col md:hidden"
+              transition={{ type: "spring", stiffness: 350, damping: 32 }}
+              className="fixed top-0 right-0 bottom-0 z-[70] w-4/5 max-w-xs bg-[#111312] border-l border-[#B8FF3B]/30 flex flex-col md:hidden font-mono text-xs select-none shadow-2xl"
             >
-              {/* Sidebar header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-foreground/10">
-                <span className="font-bold tracking-[0.25em] text-sm text-foreground">
-                  NADLR
-                </span>
-                <motion.button
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between p-4 border-b border-[#262D28] bg-[#181C1A]">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#B8FF3B]" />
+                  <span className="font-bold text-[#F3F4EF]">SYS_NAV // MOBILE</span>
+                </div>
+                <button
                   onClick={() => setSidebarOpen(false)}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border border-foreground/15 text-foreground/60 hover:text-foreground transition-all cursor-pointer"
+                  className="p-1.5 border border-[#262D28] text-[#777D76] hover:text-[#B8FF3B] cursor-pointer"
+                  aria-label="Close menu"
                 >
                   <X size={16} />
-                </motion.button>
+                </button>
               </div>
 
-              {/* Nav links */}
-              <nav className="flex flex-col gap-1 p-4 flex-1">
-                {navLinks.map(({ label, href }, i) => (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleMobileNav(href);
-                    }}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.05 + i * 0.07,
-                      duration: 0.3,
-                      ease: "easeOut",
-                    }}
-                    className="flex items-center justify-between px-4 py-4 rounded-xl text-foreground/60 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 cursor-pointer group"
-                    style={{
-                      color:
-                        activeSection === href
-                          ? "var(--foreground)"
-                          : undefined,
-                      background:
-                        activeSection === href
-                          ? "color-mix(in oklch, var(--foreground) 6%, transparent)"
-                          : undefined,
-                    }}
-                  >
-                    <span className="text-sm tracking-widest uppercase">
-                      {label}
-                    </span>
-                    {activeSection === href && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-foreground" />
-                    )}
-                  </motion.a>
-                ))}
+              {/* Navigation Actions */}
+              <nav className="flex flex-col gap-2 p-4 flex-1 overflow-y-auto">
+                {navLinks.map(({ label, href, id }) => {
+                  const isActive = activeSection === href;
+                  return (
+                    <button
+                      key={href}
+                      onClick={() => handleMobileNav(href)}
+                      className={`flex items-center justify-between p-3 border text-left transition-colors cursor-pointer ${
+                        isActive
+                          ? "border-[#B8FF3B] bg-[#B8FF3B]/10 text-[#B8FF3B] font-bold"
+                          : "border-[#262D28] bg-[#141816] text-[#F3F4EF] hover:border-[#B8FF3B]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-[#777D76]">[{id}]</span>
+                        <span>{label.toUpperCase()}</span>
+                      </div>
+                      <ArrowUpRight size={14} className="text-[#777D76]" />
+                    </button>
+                  );
+                })}
+
+                <button
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    setTimeout(triggerPalette, 200);
+                  }}
+                  className="flex items-center justify-between p-3 border border-[#262D28] bg-[#141816] text-[#B8FF3B] hover:border-[#B8FF3B] mt-2 cursor-pointer"
+                >
+                  <div className="flex items-center gap-2 font-bold">
+                    <Search size={14} />
+                    <span>LAUNCH COMMAND BAR</span>
+                  </div>
+                  <span className="text-[10px] px-1 bg-[#181C1A] text-[#777D76]">⌘K</span>
+                </button>
+
+                <a
+                  href="/CV_Farhan_Sultan_Nadlir.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between p-3 border border-[#B8FF3B] bg-[#B8FF3B] text-[#111312] font-bold mt-2"
+                >
+                  <div className="flex items-center gap-2">
+                    <FileText size={14} />
+                    <span>DOWNLOAD RESUME (PDF)</span>
+                  </div>
+                  <ArrowUpRight size={14} />
+                </a>
               </nav>
 
-              {/* Footer */}
-              <div className="px-6 py-5 border-t border-foreground/10">
-                <p className="text-xs text-foreground/25 tracking-wider">
-                  © 2025 Farhan Sultan Nadlir
-                </p>
+              {/* Drawer Footer */}
+              <div className="p-4 border-t border-[#262D28] bg-[#141816] text-[11px] text-[#777D76]">
+                <p className="font-bold text-[#F3F4EF]">FARHAN SULTAN NADLIR</p>
+                <p>System Information // Web Architect</p>
               </div>
             </motion.div>
           </>

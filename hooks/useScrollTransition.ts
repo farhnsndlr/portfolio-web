@@ -18,7 +18,8 @@ export function useScrollTransition() {
       target.scrollIntoView({ behavior: "smooth" });
       
       setTimeout(() => {
-        document.body.style.opacity = "1";
+        document.body.style.opacity = "";
+        document.body.style.transition = "";
       }, 400);
     }, 150);
   }, []);

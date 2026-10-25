@@ -1,10 +1,39 @@
 import { notFound } from "next/navigation";
 import { projects, techIcons } from "@/data/projects";
-import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Github,
+  ExternalLink,
+  Calendar,
+  Layers,
+  Archive,
+} from "lucide-react";
 import Link from "next/link";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ id: p.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const project = projects.find((p) => p.id === id);
+  if (!project) return { title: "Project Not Found" };
+
+  return {
+    metadataBase: new URL("https://nadlr.my.id"),
+    title: `${project.title} — Farhan Sultan Nadlir`,
+    description: project.shortDesc,
+    openGraph: {
+      title: `${project.title} — Farhan Sultan Nadlir`,
+      description: project.shortDesc,
+      images: project.heroImage ? [{ url: project.heroImage }] : [],
+    },
+  };
 }
 
 export default async function ProjectDetail({
@@ -13,142 +42,214 @@ export default async function ProjectDetail({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const project = projects.find((p) => p.id === id);
-  if (!project) notFound();
+  const projectIndex = projects.findIndex((p) => p.id === id);
+  if (projectIndex === -1) notFound();
+
+  const project = projects[projectIndex];
+  const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
+  const nextProject =
+    projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null;
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      {/* Back button */}
-      <div className="fixed top-4 md:top-6 left-4 md:left-6 z-50">
-        <Link
-          href="/#projects"
-          className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-full border border-foreground/15 bg-background/80 backdrop-blur-md text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-all duration-300 text-xs md:text-sm cursor-pointer"
-        >
-          <ArrowLeft size={14} />
-          Back
-        </Link>
-      </div>
+    <main className="min-h-screen bg-background text-foreground pt-20 sm:pt-24 pb-32 px-4 sm:px-8 md:px-14 font-mono selection:bg-[#FFE500] selection:text-[#171717]">
+      <div className="max-w-5xl mx-auto">
+        {/* Top Breadcrumb Navigation */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-8 text-xs">
+          <div className="flex items-center gap-2">
+            <Link
+              href="/#works"
+              className="neo-btn-white flex items-center gap-1.5 font-bold shadow-neo-sm"
+            >
+              <ArrowLeft size={13} />
+              <span>Home</span>
+            </Link>
 
-      {/* Hero Image */}
-      <div className="w-full h-[40vh] md:h-[55vh] relative overflow-hidden bg-foreground/5">
-        {project.heroImage ? (
-          <img
-            src={project.heroImage}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-foreground/20">
-            <ExternalLink size={40} />
-            <span className="text-sm tracking-wider">No preview available</span>
+            <Link
+              href="/projects"
+              className="neo-btn-yellow flex items-center gap-1.5 font-black shadow-neo-sm"
+            >
+              <Archive size={13} />
+              <span>Project Archive</span>
+            </Link>
           </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-      </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-6 pb-16 md:pb-24 -mt-12 md:-mt-16 relative z-10">
-        {/* Header */}
-        <div className="mb-8 md:mb-10">
-          <div className="flex items-center gap-3 mb-3 md:mb-4">
-            <span className="text-xs px-3 py-1 rounded-full border border-foreground/20 text-foreground/50 tracking-widest uppercase">
+          <div className="flex items-center gap-2 text-muted-foreground font-bold">
+            <span className="text-foreground bg-[#FFE500] px-2 py-0.5 text-[#171717] font-black">
               {project.category}
             </span>
-            <span className="text-xs text-foreground/30">{project.year}</span>
+            <span>·</span>
+            <span>{project.year}</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
-            {project.title}
-          </h1>
-          <p className="text-foreground/60 text-base md:text-lg max-w-2xl leading-relaxed">
-            {project.shortDesc}
-          </p>
         </div>
 
-        <div className="h-[1px] bg-foreground/10 mb-8 md:mb-10" />
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 md:mb-16">
-          <div className="md:col-span-2">
-            <h2 className="text-xs uppercase tracking-[0.25em] text-foreground/40 mb-3 md:mb-4">
-              About
-            </h2>
-            <p className="text-foreground/75 leading-relaxed text-sm md:text-[15px]">
-              {project.description}
-            </p>
+        {/* Hero Cinematic Media Frame */}
+        <div className="border-[3px] border-border bg-card overflow-hidden mb-10 p-2 shadow-neo-xl">
+          <div className="relative w-full aspect-video bg-background border-2 border-border overflow-hidden">
+            {project.heroImage ? (
+              <img
+                src={project.heroImage}
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-muted-foreground">
+                <ExternalLink size={36} />
+                <span className="text-xs uppercase">No preview available</span>
+              </div>
+            )}
           </div>
-          <div className="flex flex-col gap-6 md:gap-8">
-            <div>
-              <h2 className="text-xs uppercase tracking-[0.25em] text-foreground/40 mb-3 md:mb-4">
-                Tech Stack
-              </h2>
-              <div className="flex flex-wrap gap-2 md:gap-3">
-                {project.techStack.map((tech) => {
-                  const iconUrl = techIcons[tech.name];
-                  return (
-                    <a
-                      key={tech.name}
-                      href={tech.docs}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={tech.name}
-                      className="group cursor-pointer"
-                    >
-                      <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl border border-foreground/10 bg-foreground/5 flex items-center justify-center hover:border-foreground/30 hover:bg-foreground/10 transition-all duration-300 hover:scale-110 p-2">
-                        {iconUrl ? (
+        </div>
+
+        {/* Project Overview */}
+        <div className="border-[3px] border-border bg-card p-6 sm:p-10 mb-10 shadow-neo-xl">
+          <div className="flex flex-wrap items-center gap-2 mb-3 text-xs">
+            <span className="px-2.5 py-0.5 bg-[#FFE500] text-[#171717] font-black uppercase border border-border">
+              {project.category}
+            </span>
+            <span className="px-2.5 py-0.5 bg-secondary text-foreground border border-border flex items-center gap-1.5 font-bold">
+              <Calendar size={12} />
+              <span>{project.year}</span>
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-foreground mb-4">
+            {project.title}
+          </h1>
+
+          <p className="text-sm sm:text-base font-bold text-foreground leading-relaxed border-l-4 border-[#FFE500] pl-4 mb-8">
+            {project.shortDesc}
+          </p>
+
+          {/* Details & Tech Stack */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 border-t-2 border-border">
+            {/* Left 8 Cols: Description */}
+            <div className="md:col-span-8 space-y-3">
+              <span className="text-xs font-black text-muted-foreground uppercase block">
+                About the Project:
+              </span>
+              <p className="text-xs sm:text-sm font-sans font-medium text-foreground/85 leading-relaxed">
+                {project.description}
+              </p>
+            </div>
+
+            {/* Right 4 Cols: Technology Stack & Source Repo */}
+            <div className="md:col-span-4 flex flex-col gap-6">
+              <div>
+                <span className="text-xs font-black text-muted-foreground uppercase block mb-3">
+                  Technologies Used:
+                </span>
+
+                <div className="flex flex-wrap gap-1.5">
+                  {project.techStack.map((tech) => {
+                    const iconUrl = techIcons[tech.name];
+                    return (
+                      <a
+                        key={tech.name}
+                        href={tech.docs}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-1.5 px-2.5 py-1 bg-secondary border border-border hover:bg-[#FFE500] hover:text-[#171717] transition-colors text-xs text-foreground font-bold shadow-neo-sm"
+                        title={`Documentation for ${tech.name}`}
+                      >
+                        {iconUrl && (
                           <img
                             src={iconUrl}
                             alt={tech.name}
-                            className="w-full h-full object-contain"
+                            className="w-3.5 h-3.5 object-contain"
                           />
-                        ) : (
-                          <span className="text-[10px] text-foreground/50 font-medium">
-                            {tech.name.slice(0, 3)}
-                          </span>
                         )}
-                      </div>
-                    </a>
-                  );
-                })}
+                        <span>{tech.name}</span>
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-            <div>
-              <h2 className="text-xs uppercase tracking-[0.25em] text-foreground/40 mb-3 md:mb-4">
-                Repository
-              </h2>
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 rounded-full bg-foreground text-background text-sm font-medium hover:opacity-80 transition-all duration-300 cursor-pointer"
-              >
-                <Github size={15} />
-                View on GitHub
-                <ArrowLeft size={13} className="rotate-180" />
-              </a>
+
+              {/* Source Repo */}
+              <div className="pt-2">
+                <span className="text-foreground text-xs block mb-2 font-bold uppercase">
+                  Source Code:
+                </span>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="neo-btn-yellow w-full flex items-center justify-center gap-2 text-xs font-black"
+                >
+                  <Github size={15} />
+                  <span>View on GitHub</span>
+                  <ExternalLink size={13} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Screenshots */}
-        {project.screenshots.length > 0 && (
-          <div>
-            <h2 className="text-xs uppercase tracking-[0.25em] text-foreground/40 mb-4 md:mb-6">
-              Screenshots
-            </h2>
-            <div className="grid grid-cols-1 gap-4 md:gap-5">
+        {/* Screenshots Gallery */}
+        {project.screenshots && project.screenshots.length > 0 && (
+          <div className="space-y-6 mb-12">
+            <div className="border-b-2 border-border pb-3">
+              <h2 className="text-sm font-black text-foreground uppercase tracking-wider">
+                Interface Screenshots ({project.screenshots.length})
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-8">
               {project.screenshots.map((img, i) => (
                 <div
                   key={i}
-                  className="w-full rounded-xl md:rounded-2xl overflow-hidden border border-foreground/10 bg-foreground/5"
+                  className="border-[3px] border-border bg-card overflow-hidden p-2 shadow-neo-xl"
                 >
+                  <div className="px-3 py-1 bg-secondary text-foreground border-b-2 border-border text-xs font-bold mb-2">
+                    Screenshot figure 0{i + 1}
+                  </div>
                   <img
                     src={img}
                     alt={`${project.title} screenshot ${i + 1}`}
-                    className="w-full"
+                    className="w-full h-auto object-cover border-2 border-border"
                   />
                 </div>
               ))}
             </div>
           </div>
         )}
+
+        {/* Previous / Next Project Sequential Navigation */}
+        <div className="border-t-[2.5px] border-border pt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {prevProject ? (
+            <Link
+              href={`/projects/${prevProject.id}`}
+              className="border-2 border-border bg-card p-4 hover:bg-[#FFE500] hover:text-[#171717] transition-colors shadow-neo-sm flex flex-col justify-between group"
+            >
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground group-hover:text-[#171717] font-bold uppercase mb-1">
+                <ArrowLeft size={12} />
+                <span>Previous Project</span>
+              </div>
+              <span className="text-sm font-black uppercase">
+                {prevProject.title}
+              </span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block" />
+          )}
+
+          {nextProject ? (
+            <Link
+              href={`/projects/${nextProject.id}`}
+              className="border-2 border-border bg-card p-4 hover:bg-[#FFE500] hover:text-[#171717] transition-colors shadow-neo-sm flex flex-col justify-between items-end text-right group sm:col-start-2"
+            >
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground group-hover:text-[#171717] font-bold uppercase mb-1">
+                <span>Next Project</span>
+                <ArrowRight size={12} />
+              </div>
+              <span className="text-sm font-black uppercase">
+                {nextProject.title}
+              </span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block" />
+          )}
+        </div>
       </div>
     </main>
   );

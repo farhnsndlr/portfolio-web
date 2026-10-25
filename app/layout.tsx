@@ -1,12 +1,12 @@
 "use client";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { useState } from "react";
-import ClickSpark from "@/components/ui/ClickSpark";
-import SplashScreen from "@/components/ui/SplashScreen";
+import { motion, useScroll, useSpring } from "framer-motion";
 import PageTransition from "@/components/ui/PageTransition";
-import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/ui/BackToTop";
+import ReimaginedCommandPalette from "@/components/reimagined/ReimaginedCommandPalette";
+import ReimaginedNavbar from "@/components/reimagined/ReimaginedNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,23 +15,40 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [splashDone, setSplashDone] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <head>
-        <title>NADLR | Personal Website</title>
+        <title>Farhan Sultan Nadlir — Web Developer Portfolio</title>
+        <meta
+          name="description"
+          content="Personal portfolio of Farhan Sultan Nadlir, an Information Systems student based in Indonesia building web applications with Next.js, React, and Laravel."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body
-        className={`${inter.className} bg-background text-foreground relative transition-colors duration-300`}
+        className={`${inter.className} bg-background text-foreground relative transition-colors duration-150 antialiased min-h-screen selection:bg-[#FFE500] selection:text-[#171717]`}
       >
-        {!splashDone && <SplashScreen onComplete={() => setSplashDone(true)} />}
-        <div className="fixed inset-0 bg-background/60 -z-10 transition-colors duration-300" />
-        <Navbar />
-        <ClickSpark>
-          <PageTransition>{children}</PageTransition>
-        </ClickSpark>
+        {/* Top Reading Progress Bar */}
+        <motion.div
+          style={{ scaleX }}
+          className="fixed top-0 left-0 right-0 h-[3.5px] bg-[#FFE500] origin-left z-[9999]"
+        />
+
+        {/* Persistent Sticky / Fixed Navbar (always accessible across viewport and routes) */}
+        <ReimaginedNavbar />
+
+        {/* Global Command Palette (Cmd+K / Ctrl+K) */}
+        <ReimaginedCommandPalette />
+
+        <PageTransition>{children}</PageTransition>
         <BackToTop />
       </body>
     </html>

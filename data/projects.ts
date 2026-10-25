@@ -3,12 +3,14 @@ export type Project = {
   title: string;
   shortDesc: string;
   description: string;
+  summary?: string;
   techStack: TechItem[];
   github: string;
   heroImage: string;
   screenshots: string[];
   year: string;
   category: string;
+  featured?: boolean;
 };
 
 export type TechItem = {
@@ -24,6 +26,8 @@ export const projects: Project[] = [
       "Web katalog interaktif dengan animasi modern dan routing dinamis.",
     description:
       "Project ini adalah aplikasi web katalog interaktif berbasis React dan TypeScript yang menampilkan makanan, minuman, dan jasa dengan routing dinamis, animasi modern menggunakan Framer Motion, desain responsif mobile-first, serta fitur interaktif seperti smart search, carousel, lightbox galeri, dan integrasi Web Share serta WhatsApp, dengan struktur modular dan fokus pada performa serta pengalaman pengguna yang halus.",
+    summary:
+      "An interactive web catalog built with React, TypeScript, and Framer Motion for local small businesses to showcase products with direct WhatsApp ordering and dynamic routing.",
     techStack: [
       { name: "Next.js", docs: "https://nextjs.org/docs" },
       { name: "React", docs: "https://react.dev/" },
@@ -35,6 +39,7 @@ export const projects: Project[] = [
     screenshots: ["/projects/umkm-i/umkm1.png", "/projects/umkm-i/umkm2.png"],
     year: "2025",
     category: "Web App",
+    featured: true,
   },
   {
     id: "absenku",
@@ -42,6 +47,8 @@ export const projects: Project[] = [
     shortDesc: "Sistem presensi kampus berbasis GPS dan foto real-time.",
     description:
       "AbsenKu adalah sistem presensi digital berbasis Laravel yang memvalidasi kehadiran mahasiswa secara real-time menggunakan kombinasi GPS Geofencing dan verifikasi foto wajah untuk mencegah titip absen. Aplikasi ini dirancang dengan arsitektur monolithic yang fokus pada kecepatan pengembangan dan kemudahan deployment, serta menyediakan fitur berbeda untuk setiap peran, mulai dari dashboard mobile-first dan smart check-in untuk mahasiswa, manajemen sesi fleksibel dan monitoring real-time untuk dosen, hingga kontrol master data terpusat bagi admin, dengan dukungan teknologi seperti Laravel, Blade, TailwindCSS, MySQL, Cloudinary, dan integrasi native browser API untuk kamera serta geolocation.",
+    summary:
+      "A campus attendance system engineered with Laravel and MySQL that uses browser GPS geofencing and real-time photo verification to prevent attendance fraud.",
     techStack: [
       { name: "Laravel", docs: "https://laravel.com/docs" },
       { name: "MySQL", docs: "https://dev.mysql.com/doc" },
@@ -57,6 +64,7 @@ export const projects: Project[] = [
     ],
     year: "2025",
     category: "Web App",
+    featured: true,
   },
   {
     id: "portfolio",
@@ -64,6 +72,8 @@ export const projects: Project[] = [
     shortDesc: "Personal portfolio dengan animasi dan dark mode support.",
     description:
       "Website portfolio personal yang dibangun dengan Next.js dan Tailwind CSS. Menampilkan projects, skills, dan informasi kontak dengan desain modern. Dilengkapi dark/light mode dengan ripple transition effect dan animasi marquee untuk skills carousel.",
+    summary:
+      "Personal portfolio website built with Next.js 16 (Turbopack), React 19, and Tailwind CSS v4, featuring high-contrast light and dark themes and accessible motion.",
     techStack: [
       { name: "Next.js", docs: "https://nextjs.org/docs" },
       { name: "TypeScript", docs: "https://www.typescriptlang.org/docs" },
@@ -78,8 +88,24 @@ export const projects: Project[] = [
     ],
     year: "2025",
     category: "Frontend",
+    featured: false,
   },
 ];
+
+export function getFeaturedProjects(): Project[] {
+  const featured = projects.filter((p) => p.featured);
+  return featured.length > 0 ? featured : projects.slice(0, 2);
+}
+
+export function getAllCategories(): string[] {
+  return Array.from(new Set(projects.map((p) => p.category)));
+}
+
+export function getAllTechnologies(): string[] {
+  const set = new Set<string>();
+  projects.forEach((p) => p.techStack.forEach((t) => set.add(t.name)));
+  return Array.from(set);
+}
 
 // Map tech name ke icon dari Simple Icons / devicons
 export const techIcons: Record<string, string> = {
