@@ -168,7 +168,7 @@ export default function ModernHero() {
                 {[
                   {
                     icon: MessageCircle,
-                    href: "https://wa.me/6285155399057",
+                    href: "https://wa.me/6281574029222",
                     label: "WhatsApp",
                   },
                   {

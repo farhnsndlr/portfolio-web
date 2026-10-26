@@ -94,7 +94,7 @@ export default function ReimaginedContact() {
 
               {/* Direct WhatsApp Action */}
               <a
-                href="https://wa.me/6285155399057"
+                href="https://wa.me/6281574029222"
                 target="_blank"
                 rel="noreferrer"
                 className="neo-btn-black w-full flex items-center justify-between text-xs font-black p-4 shadow-neo"

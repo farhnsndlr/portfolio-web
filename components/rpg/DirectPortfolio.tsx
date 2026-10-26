@@ -438,7 +438,7 @@ export default function DirectPortfolio({ onReturnToGame }: DirectPortfolioProps
 
               {/* Instant WhatsApp Link */}
               <a
-                href="https://wa.me/6285155399057"
+                href="https://wa.me/6281574029222"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-between p-3.5 bg-[#68B86B] text-[#1D241E] border-2 border-[#242B25] font-bold text-xs hover:bg-[#F2C94C] transition-colors shadow-sm"

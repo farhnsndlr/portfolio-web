@@ -98,7 +98,7 @@ export default function ChaosHero() {
               {[
                 {
                   icon: MessageCircle,
-                  href: "https://wa.me/6285155399057",
+                  href: "https://wa.me/6281574029222",
                   label: "WhatsApp",
                   accent: "border-[#C8FF00] text-[#C8FF00] hover:bg-[#C8FF00] hover:text-[#0A0A0A]",
                 },

@@ -187,7 +187,7 @@ export default function ModernContact() {
 
             {/* Instant WhatsApp Channel */}
             <a
-              href="https://wa.me/6285155399057"
+              href="https://wa.me/6281574029222"
               target="_blank"
               rel="noreferrer"
               className="editorial-card rounded-2xl p-5 flex items-center justify-between group cursor-pointer"

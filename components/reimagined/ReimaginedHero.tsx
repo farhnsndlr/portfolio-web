@@ -107,7 +107,7 @@ export default function ReimaginedHero() {
                 <span>LinkedIn</span>
               </a>
               <a
-                href="https://wa.me/6285155399057"
+                href="https://wa.me/6281574029222"
                 target="_blank"
                 rel="noreferrer"
                 className="px-2.5 py-1 bg-card border border-border text-foreground hover:bg-[#FFE500] hover:text-[#171717] transition-colors shadow-neo-sm flex items-center gap-1.5"

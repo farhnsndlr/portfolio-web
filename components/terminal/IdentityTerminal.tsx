@@ -212,7 +212,7 @@ export default function IdentityTerminal() {
               <p>
                 <span className="text-[#777D76]">WHATSAPP:</span>{" "}
                 <a
-                  href="https://wa.me/6285155399057"
+                  href="https://wa.me/6281574029222"
                   target="_blank"
                   rel="noreferrer"
                   className="text-[#B8FF3B] hover:underline font-bold"

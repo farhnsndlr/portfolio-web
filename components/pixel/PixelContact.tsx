@@ -181,7 +181,7 @@ export default function PixelContact() {
 
             {/* Instant WhatsApp Button */}
             <a
-              href="https://wa.me/6285155399057"
+              href="https://wa.me/6281574029222"
               target="_blank"
               rel="noreferrer"
               className="flex items-center justify-between p-3.5 bg-[#79B86A] text-[#1D241E] border-[3px] border-[#242B25] font-black text-xs hover:bg-[#F2C94C] transition-colors shadow-md"

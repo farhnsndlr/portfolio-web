@@ -187,7 +187,7 @@ export default function ChaosContact() {
 
             {/* Instant WhatsApp Link */}
             <a
-              href="https://wa.me/6285155399057"
+              href="https://wa.me/6281574029222"
               target="_blank"
               rel="noreferrer"
               className="flex items-center justify-between p-4 bg-[#0A0A0A] border-2 border-[#C8FF00] text-[#C8FF00] font-black text-xs hover:bg-[#C8FF00] hover:text-[#0A0A0A] transition-colors shadow-chaos-magenta"
